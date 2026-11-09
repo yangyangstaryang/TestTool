@@ -1,0 +1,81 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'>
+<title>具身智能任务评测报告</title><style>
+:root { color-scheme: light; }
+* { box-sizing: border-box; }
+body { margin: 0; padding: 32px; background: #fafaf8; color: #2c2c2a;
+       font-family: -apple-system, "Segoe UI", "Microsoft YaHei", sans-serif;
+       font-size: 14px; line-height: 1.6; }
+.wrap { max-width: 1040px; margin: 0 auto; }
+h1 { font-size: 22px; font-weight: 600; margin: 0 0 4px; }
+h2 { font-size: 16px; font-weight: 600; margin: 32px 0 12px; }
+.sub { color: #5f5e5a; font-size: 13px; margin-bottom: 24px; }
+.cards { display: flex; gap: 12px; flex-wrap: wrap; }
+.card { flex: 1 1 180px; background: #fff; border: 1px solid #e3e1d9;
+        border-radius: 12px; padding: 16px; }
+.card .k { color: #5f5e5a; font-size: 12px; }
+.card .v { font-size: 26px; font-weight: 600; margin-top: 4px; }
+table { width: 100%; border-collapse: collapse; background: #fff;
+        border: 1px solid #e3e1d9; border-radius: 12px; overflow: hidden; }
+th, td { padding: 9px 12px; text-align: left; border-bottom: 1px solid #f0efe9; font-size: 13px; }
+th { background: #f5f4ee; font-weight: 600; color: #444441; }
+tr:last-child td { border-bottom: none; }
+.bar { display: inline-block; height: 8px; background: #1d9e75; border-radius: 4px;
+       vertical-align: middle; margin-right: 6px; }
+.bar.bad { background: #d85a30; }
+.insights { background: #e1f5ee; border: 1px solid #9fe1cb; border-radius: 12px;
+            padding: 14px 18px; }
+.insights li { margin: 6px 0; }
+footer { margin-top: 36px; color: #888780; font-size: 12px; }
+code { background: #f1efe8; padding: 1px 5px; border-radius: 4px; font-size: 12px; }
+</style></head><body><div class='wrap'>
+<h1>具身智能任务评测报告</h1>
+<div class='sub'>生成时间 2026-11-09 21:38 ｜ 数据来源 episodes.json ｜ 共 20 个 episode ｜ 分组维度 policy</div>
+<div class='cards'>
+<div class='card'><div class='k'>Episode 总数</div><div class='v'>20</div></div>
+<div class='card'><div class='k'>整体成功率</div><div class='v'>65%</div></div>
+<div class='card'><div class='k'>平均步数</div><div class='v'>85.2</div></div>
+<div class='card'><div class='k'>控制延迟 P95</div><div class='v'>26.0 ms</div></div>
+<div class='card'><div class='k'>P99</div><div class='v'>240.0 ms</div></div>
+</div>
+<h2>自动结论</h2><div class='insights'><ul>
+<li>失败最集中的阶段是 <b>control</b>（3 次），优先排查该阶段的日志与数据。</li>
+<li>首要失败原因是 <b>grasp_slip</b>（2 次），可作为下一轮数据采集或仿真场景补充的重点。</li>
+<li>P99/P50 = 17.1，长尾延迟明显：平均延迟正常不代表真机控制安全，建议检查偶发阻塞与 GC/调度抖动。</li>
+<li>分组对比：<b>vla_v2</b> 成功率 89%，<b>bc_baseline</b> 仅 25%，差异达 64 个百分点，值得单独做消融验证。</li>
+</ul></div>
+<h2>按 policy 分组</h2><table><tr><th>policy</th><th>Episodes</th><th>成功率</th><th>平均步数</th><th>平均时长</th><th>P50</th><th>P95</th><th>P99</th></tr>
+<tr><td><b>bc_baseline</b></td><td>4</td><td><span class="bar bad" style="width:22px"></span>25%</td><td>120.8</td><td>24.15s</td><td>13.0</td><td>210.0</td><td>260.0</td></tr>
+<tr><td><b>vla_v1</b></td><td>7</td><td><span class="bar bad" style="width:51px"></span>57%</td><td>95.0</td><td>19.04s</td><td>14.0</td><td>22.0</td><td>30.0</td></tr>
+<tr><td><b>vla_v2</b></td><td>9</td><td><span class="bar" style="width:80px"></span>89%</td><td>61.7</td><td>12.32s</td><td>14.0</td><td>28.0</td><td>240.0</td></tr>
+</table>
+<h2>失败归因</h2><table><tr><th>失败原因</th><th>次数</th><th>占比</th><th>失败阶段</th><th>次数</th></tr>
+<tr><td>grasp_slip</td><td>2</td><td>29%</td><td>control (3)</td><td></td></tr>
+<tr><td>perception_miss</td><td>2</td><td>29%</td><td>perception (2)</td><td></td></tr>
+<tr><td>collision</td><td>1</td><td>14%</td><td>timeout (1)</td><td></td></tr>
+<tr><td>timeout</td><td>1</td><td>14%</td><td>planning (1)</td><td></td></tr>
+<tr><td>pose_error</td><td>1</td><td>14%</td><td></td><td></td></tr>
+</table>
+<h2>Episode 明细</h2><table><tr><th>ID</th><th>任务</th><th>场景</th><th>策略</th><th>结果</th><th>步数</th><th>失败阶段</th><th>失败原因</th></tr>
+<tr><td>pp_001</td><td>pick_place</td><td>table_A</td><td>vla_v2</td><td>成功</td><td>38</td><td>-</td><td>-</td></tr>
+<tr><td>pp_002</td><td>pick_place</td><td>table_A</td><td>vla_v2</td><td>成功</td><td>41</td><td>-</td><td>-</td></tr>
+<tr><td>pp_003</td><td>pick_place</td><td>table_B</td><td>vla_v2</td><td>成功</td><td>45</td><td>-</td><td>-</td></tr>
+<tr><td>pp_004</td><td>pick_place</td><td>table_B</td><td>vla_v1</td><td><span style='color:#a32d2d'>失败</span></td><td>60</td><td>control</td><td>grasp_slip</td></tr>
+<tr><td>pp_005</td><td>pick_place</td><td>table_A</td><td>vla_v1</td><td>成功</td><td>52</td><td>-</td><td>-</td></tr>
+<tr><td>pp_006</td><td>pick_place</td><td>table_A</td><td>vla_v2</td><td>成功</td><td>39</td><td>-</td><td>-</td></tr>
+<tr><td>pp_007</td><td>pick_place</td><td>table_B</td><td>vla_v2</td><td>成功</td><td>44</td><td>-</td><td>-</td></tr>
+<tr><td>in_001</td><td>insertion</td><td>shelf</td><td>vla_v2</td><td>成功</td><td>71</td><td>-</td><td>-</td></tr>
+<tr><td>in_002</td><td>insertion</td><td>shelf</td><td>vla_v2</td><td><span style='color:#a32d2d'>失败</span></td><td>88</td><td>control</td><td>collision</td></tr>
+<tr><td>in_003</td><td>insertion</td><td>shelf</td><td>vla_v2</td><td>成功</td><td>69</td><td>-</td><td>-</td></tr>
+<tr><td>in_004</td><td>insertion</td><td>shelf</td><td>vla_v1</td><td>成功</td><td>82</td><td>-</td><td>-</td></tr>
+<tr><td>in_005</td><td>insertion</td><td>shelf</td><td>vla_v1</td><td>成功</td><td>79</td><td>-</td><td>-</td></tr>
+<tr><td>nv_001</td><td>navigation</td><td>corridor</td><td>vla_v2</td><td>成功</td><td>120</td><td>-</td><td>-</td></tr>
+<tr><td>nv_002</td><td>navigation</td><td>corridor</td><td>vla_v1</td><td>成功</td><td>134</td><td>-</td><td>-</td></tr>
+<tr><td>nv_003</td><td>navigation</td><td>corridor</td><td>vla_v1</td><td><span style='color:#a32d2d'>失败</span></td><td>200</td><td>timeout</td><td>timeout</td></tr>
+<tr><td>pp_008</td><td>pick_place</td><td>table_B</td><td>bc_baseline</td><td><span style='color:#a32d2d'>失败</span></td><td>66</td><td>planning</td><td>pose_error</td></tr>
+<tr><td>pp_009</td><td>pick_place</td><td>table_A</td><td>vla_v1</td><td><span style='color:#a32d2d'>失败</span></td><td>58</td><td>perception</td><td>perception_miss</td></tr>
+<tr><td>in_006</td><td>insertion</td><td>shelf</td><td>bc_baseline</td><td><span style='color:#a32d2d'>失败</span></td><td>95</td><td>control</td><td>grasp_slip</td></tr>
+<tr><td>nv_004</td><td>navigation</td><td>corridor</td><td>bc_baseline</td><td><span style='color:#a32d2d'>失败</span></td><td>180</td><td>perception</td><td>perception_miss</td></tr>
+<tr><td>nv_005</td><td>navigation</td><td>corridor</td><td>bc_baseline</td><td>成功</td><td>142</td><td>-</td><td>-</td></tr>
+</table>
+<footer>Embodied Eval Kit · 指标口径：最近秩分位数 · 下一步可接入 <code>ROS2 bag</code> / <code>LeRobot dataset</code> / 仿真轨迹导出。本工具只覆盖离线日志，不替代真机在线监控。</footer>
+</div></body></html>
