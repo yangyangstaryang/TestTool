@@ -111,12 +111,15 @@ def summarize(episodes):
     """把一个 episode 集合压成一组指标。"""
     n = len(episodes)
     ok = [e for e in episodes if e["success"]]
+    fail = [e for e in episodes if not e["success"]]
     latency = [v for e in episodes for v in e["latency_ms"]]
     return {
         "count": n,
         "success_count": len(ok),
         "success_rate": (len(ok) / n) if n else 0.0,
         "avg_steps": round(statistics.mean([e["steps"] for e in episodes]), 1) if n else 0.0,
+        "avg_steps_success": round(statistics.mean([e["steps"] for e in ok]), 1) if ok else 0.0,
+        "avg_steps_fail": round(statistics.mean([e["steps"] for e in fail]), 1) if fail else 0.0,
         "avg_duration": round(statistics.mean([e["duration_s"] for e in episodes]), 2) if n else 0.0,
         "p50": percentile(latency, 0.50),
         "p95": percentile(latency, 0.95),
@@ -240,6 +243,7 @@ def render(episodes, files, group_key, output: Path):
     for k, v in (("Episode 总数", str(overall["count"])),
                  ("整体成功率", pct(overall["success_rate"])),
                  ("平均步数", str(overall["avg_steps"])),
+                 ("成功/失败平均步数", "%.1f / %.1f" % (overall["avg_steps_success"], overall["avg_steps_fail"])),
                  ("控制延迟 P95", "%.1f ms" % overall["p95"]),
                  ("P99", "%.1f ms" % overall["p99"])):
         p.append("<div class='card'><div class='k'>%s</div><div class='v'>%s</div></div>" % (k, v))
@@ -306,6 +310,8 @@ def self_test():
     assert m["count"] == 2, "count 错误"
     assert abs(m["success_rate"] - 0.5) < 1e-9, "success_rate 错误"
     assert m["avg_steps"] == 15.0, "avg_steps 错误"
+    assert m["avg_steps_success"] == 10.0, "成功组平均步数错误"
+    assert m["avg_steps_fail"] == 20.0, "失败组平均步数错误"
     assert m["p50"] == 10.0, "p50 错误"
     assert m["p95"] == 200.0, "p95 应捕获长尾"
     reasons, stages = failure_breakdown(sample)
