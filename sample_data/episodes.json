@@ -1,22 +1,462 @@
 [
-{"episode_id":"pp_001","task":"pick_place","scene":"table_A","policy":"vla_v2","success":true,"steps":38,"duration_s":7.6,"failure_stage":null,"failure_reason":null,"latency_ms":[11,12,13,11,14,12,28]},
-{"episode_id":"pp_002","task":"pick_place","scene":"table_A","policy":"vla_v2","success":true,"steps":41,"duration_s":8.1,"failure_stage":null,"failure_reason":null,"latency_ms":[12,13,12,14,11,13,15]},
-{"episode_id":"pp_003","task":"pick_place","scene":"table_B","policy":"vla_v2","success":true,"steps":45,"duration_s":9.0,"failure_stage":null,"failure_reason":null,"latency_ms":[13,12,14,13,15,12,190]},
-{"episode_id":"pp_004","task":"pick_place","scene":"table_B","policy":"vla_v1","success":false,"steps":60,"duration_s":12.4,"failure_stage":"control","failure_reason":"grasp_slip","latency_ms":[14,13,15,12,16,14,22]},
-{"episode_id":"pp_005","task":"pick_place","scene":"table_A","policy":"vla_v1","success":true,"steps":52,"duration_s":10.3,"failure_stage":null,"failure_reason":null,"latency_ms":[12,14,13,15,12,13,18]},
-{"episode_id":"pp_006","task":"pick_place","scene":"table_A","policy":"vla_v2","success":true,"steps":39,"duration_s":7.8,"failure_stage":null,"failure_reason":null,"latency_ms":[11,12,11,13,12,11,14]},
-{"episode_id":"pp_007","task":"pick_place","scene":"table_B","policy":"vla_v2","success":true,"steps":44,"duration_s":8.8,"failure_stage":null,"failure_reason":null,"latency_ms":[13,12,14,13,12,15,16]},
-{"episode_id":"in_001","task":"insertion","scene":"shelf","policy":"vla_v2","success":true,"steps":71,"duration_s":14.2,"failure_stage":null,"failure_reason":null,"latency_ms":[15,16,14,17,15,16,35]},
-{"episode_id":"in_002","task":"insertion","scene":"shelf","policy":"vla_v2","success":false,"steps":88,"duration_s":17.6,"failure_stage":"control","failure_reason":"collision","latency_ms":[16,15,17,16,18,15,240]},
-{"episode_id":"in_003","task":"insertion","scene":"shelf","policy":"vla_v2","success":true,"steps":69,"duration_s":13.8,"failure_stage":null,"failure_reason":null,"latency_ms":[14,15,16,14,15,17,20]},
-{"episode_id":"in_004","task":"insertion","scene":"shelf","policy":"vla_v1","success":true,"steps":82,"duration_s":16.4,"failure_stage":null,"failure_reason":null,"latency_ms":[16,17,15,18,16,17,26]},
-{"episode_id":"in_005","task":"insertion","scene":"shelf","policy":"vla_v1","success":true,"steps":79,"duration_s":15.8,"failure_stage":null,"failure_reason":null,"latency_ms":[15,16,17,15,16,18,22]},
-{"episode_id":"nv_001","task":"navigation","scene":"corridor","policy":"vla_v2","success":true,"steps":120,"duration_s":24.0,"failure_stage":null,"failure_reason":null,"latency_ms":[10,11,10,12,11,10,14]},
-{"episode_id":"nv_002","task":"navigation","scene":"corridor","policy":"vla_v1","success":true,"steps":134,"duration_s":26.8,"failure_stage":null,"failure_reason":null,"latency_ms":[11,12,11,13,12,11,16]},
-{"episode_id":"nv_003","task":"navigation","scene":"corridor","policy":"vla_v1","success":false,"steps":200,"duration_s":40.0,"failure_stage":"timeout","failure_reason":"timeout","latency_ms":[12,11,13,12,14,12,30]},
-{"episode_id":"pp_008","task":"pick_place","scene":"table_B","policy":"bc_baseline","success":false,"steps":66,"duration_s":13.2,"failure_stage":"planning","failure_reason":"pose_error","latency_ms":[13,14,13,15,14,13,210]},
-{"episode_id":"pp_009","task":"pick_place","scene":"table_A","policy":"vla_v1","success":false,"steps":58,"duration_s":11.6,"failure_stage":"perception","failure_reason":"perception_miss","latency_ms":[12,13,14,12,13,14,19]},
-{"episode_id":"in_006","task":"insertion","scene":"shelf","policy":"bc_baseline","success":false,"steps":95,"duration_s":19.0,"failure_stage":"control","failure_reason":"grasp_slip","latency_ms":[16,17,15,18,16,17,25]},
-{"episode_id":"nv_004","task":"navigation","scene":"corridor","policy":"bc_baseline","success":false,"steps":180,"duration_s":36.0,"failure_stage":"perception","failure_reason":"perception_miss","latency_ms":[12,13,11,14,12,13,260]},
-{"episode_id":"nv_005","task":"navigation","scene":"corridor","policy":"bc_baseline","success":true,"steps":142,"duration_s":28.4,"failure_stage":null,"failure_reason":null,"latency_ms":[11,12,12,13,11,12,17]}
+    {
+        "episode_id": "pp_001",
+        "task": "pick_place",
+        "scene": "table_A",
+        "policy": "vla_v2",
+        "success": true,
+        "steps": 38,
+        "duration_s": 7.6,
+        "failure_stage": null,
+        "failure_reason": null,
+        "latency_ms": [
+            11,
+            12,
+            13,
+            11,
+            14,
+            12,
+            28
+        ]
+    },
+    {
+        "episode_id": "pp_002",
+        "task": "pick_place",
+        "scene": "table_A",
+        "policy": "vla_v2",
+        "success": true,
+        "steps": 41,
+        "duration_s": 8.1,
+        "failure_stage": null,
+        "failure_reason": null,
+        "latency_ms": [
+            12,
+            13,
+            12,
+            14,
+            11,
+            13,
+            15
+        ]
+    },
+    {
+        "episode_id": "pp_003",
+        "task": "pick_place",
+        "scene": "table_B",
+        "policy": "vla_v2",
+        "success": true,
+        "steps": 45,
+        "duration_s": 9.0,
+        "failure_stage": null,
+        "failure_reason": null,
+        "latency_ms": [
+            13,
+            12,
+            14,
+            13,
+            15,
+            12,
+            190
+        ]
+    },
+    {
+        "episode_id": "pp_004",
+        "task": "pick_place",
+        "scene": "table_B",
+        "policy": "vla_v1",
+        "success": false,
+        "steps": 60,
+        "duration_s": 12.4,
+        "failure_stage": "control",
+        "failure_reason": "grasp_slip",
+        "latency_ms": [
+            14,
+            13,
+            15,
+            12,
+            16,
+            14,
+            22
+        ]
+    },
+    {
+        "episode_id": "pp_005",
+        "task": "pick_place",
+        "scene": "table_A",
+        "policy": "vla_v1",
+        "success": true,
+        "steps": 52,
+        "duration_s": 10.3,
+        "failure_stage": null,
+        "failure_reason": null,
+        "latency_ms": [
+            12,
+            14,
+            13,
+            15,
+            12,
+            13,
+            18
+        ]
+    },
+    {
+        "episode_id": "pp_006",
+        "task": "pick_place",
+        "scene": "table_A",
+        "policy": "vla_v2",
+        "success": true,
+        "steps": 39,
+        "duration_s": 7.8,
+        "failure_stage": null,
+        "failure_reason": null,
+        "latency_ms": [
+            11,
+            12,
+            11,
+            13,
+            12,
+            11,
+            14
+        ]
+    },
+    {
+        "episode_id": "pp_007",
+        "task": "pick_place",
+        "scene": "table_B",
+        "policy": "vla_v2",
+        "success": true,
+        "steps": 44,
+        "duration_s": 8.8,
+        "failure_stage": null,
+        "failure_reason": null,
+        "latency_ms": [
+            13,
+            12,
+            14,
+            13,
+            12,
+            15,
+            16
+        ]
+    },
+    {
+        "episode_id": "in_001",
+        "task": "insertion",
+        "scene": "shelf",
+        "policy": "vla_v2",
+        "success": true,
+        "steps": 71,
+        "duration_s": 14.2,
+        "failure_stage": null,
+        "failure_reason": null,
+        "latency_ms": [
+            15,
+            16,
+            14,
+            17,
+            15,
+            16,
+            35
+        ]
+    },
+    {
+        "episode_id": "in_002",
+        "task": "insertion",
+        "scene": "shelf",
+        "policy": "vla_v2",
+        "success": false,
+        "steps": 88,
+        "duration_s": 17.6,
+        "failure_stage": "control",
+        "failure_reason": "collision",
+        "latency_ms": [
+            16,
+            15,
+            17,
+            16,
+            18,
+            15,
+            240
+        ]
+    },
+    {
+        "episode_id": "in_003",
+        "task": "insertion",
+        "scene": "shelf",
+        "policy": "vla_v2",
+        "success": true,
+        "steps": 69,
+        "duration_s": 13.8,
+        "failure_stage": null,
+        "failure_reason": null,
+        "latency_ms": [
+            14,
+            15,
+            16,
+            14,
+            15,
+            17,
+            20
+        ]
+    },
+    {
+        "episode_id": "in_004",
+        "task": "insertion",
+        "scene": "shelf",
+        "policy": "vla_v1",
+        "success": true,
+        "steps": 82,
+        "duration_s": 16.4,
+        "failure_stage": null,
+        "failure_reason": null,
+        "latency_ms": [
+            16,
+            17,
+            15,
+            18,
+            16,
+            17,
+            26
+        ]
+    },
+    {
+        "episode_id": "in_005",
+        "task": "insertion",
+        "scene": "shelf",
+        "policy": "vla_v1",
+        "success": true,
+        "steps": 79,
+        "duration_s": 15.8,
+        "failure_stage": null,
+        "failure_reason": null,
+        "latency_ms": [
+            15,
+            16,
+            17,
+            15,
+            16,
+            18,
+            22
+        ]
+    },
+    {
+        "episode_id": "nv_001",
+        "task": "navigation",
+        "scene": "corridor",
+        "policy": "vla_v2",
+        "success": true,
+        "steps": 120,
+        "duration_s": 24.0,
+        "failure_stage": null,
+        "failure_reason": null,
+        "latency_ms": [
+            10,
+            11,
+            10,
+            12,
+            11,
+            10,
+            14
+        ]
+    },
+    {
+        "episode_id": "nv_002",
+        "task": "navigation",
+        "scene": "corridor",
+        "policy": "vla_v1",
+        "success": true,
+        "steps": 134,
+        "duration_s": 26.8,
+        "failure_stage": null,
+        "failure_reason": null,
+        "latency_ms": [
+            11,
+            12,
+            11,
+            13,
+            12,
+            11,
+            16
+        ]
+    },
+    {
+        "episode_id": "nv_003",
+        "task": "navigation",
+        "scene": "corridor",
+        "policy": "vla_v1",
+        "success": false,
+        "steps": 200,
+        "duration_s": 40.0,
+        "failure_stage": "timeout",
+        "failure_reason": "timeout",
+        "latency_ms": [
+            12,
+            11,
+            13,
+            12,
+            14,
+            12,
+            30
+        ]
+    },
+    {
+        "episode_id": "pp_008",
+        "task": "pick_place",
+        "scene": "table_B",
+        "policy": "bc_baseline",
+        "success": false,
+        "steps": 66,
+        "duration_s": 13.2,
+        "failure_stage": "planning",
+        "failure_reason": "pose_error",
+        "latency_ms": [
+            13,
+            14,
+            13,
+            15,
+            14,
+            13,
+            210
+        ]
+    },
+    {
+        "episode_id": "pp_009",
+        "task": "pick_place",
+        "scene": "table_A",
+        "policy": "vla_v1",
+        "success": false,
+        "steps": 58,
+        "duration_s": 11.6,
+        "failure_stage": "perception",
+        "failure_reason": "perception_miss",
+        "latency_ms": [
+            12,
+            13,
+            14,
+            12,
+            13,
+            14,
+            19
+        ]
+    },
+    {
+        "episode_id": "in_006",
+        "task": "insertion",
+        "scene": "shelf",
+        "policy": "bc_baseline",
+        "success": false,
+        "steps": 95,
+        "duration_s": 19.0,
+        "failure_stage": "control",
+        "failure_reason": "grasp_slip",
+        "latency_ms": [
+            16,
+            17,
+            15,
+            18,
+            16,
+            17,
+            25
+        ]
+    },
+    {
+        "episode_id": "nv_004",
+        "task": "navigation",
+        "scene": "corridor",
+        "policy": "bc_baseline",
+        "success": false,
+        "steps": 180,
+        "duration_s": 36.0,
+        "failure_stage": "perception",
+        "failure_reason": "perception_miss",
+        "latency_ms": [
+            12,
+            13,
+            11,
+            14,
+            12,
+            13,
+            260
+        ]
+    },
+    {
+        "episode_id": "nv_005",
+        "task": "navigation",
+        "scene": "corridor",
+        "policy": "bc_baseline",
+        "success": true,
+        "steps": 142,
+        "duration_s": 28.4,
+        "failure_stage": null,
+        "failure_reason": null,
+        "latency_ms": [
+            11,
+            12,
+            12,
+            13,
+            11,
+            12,
+            17
+        ]
+    },
+    {
+        "episode_id": "my_001",
+        "task": "pick_place",
+        "scene": "table_A",
+        "policy": "vla_v2",
+        "success": true,
+        "steps": 38,
+        "duration_s": 7.6,
+        "failure_stage": null,
+        "failure_reason": null,
+        "latency_ms": [
+            11,
+            12,
+            13,
+            11,
+            14,
+            12,
+            28
+        ]
+    },
+    {
+        "episode_id": "my_002",
+        "task": "pick_place",
+        "scene": "table_A",
+        "policy": "vla_v2",
+        "success": false,
+        "steps": 38,
+        "duration_s": 7.6,
+        "failure_stage": "control",
+        "failure_reason": "grasp_slip",
+        "latency_ms": [
+            11,
+            12,
+            13,
+            11,
+            14,
+            12,
+            28
+        ]
+    },
+    {
+        "episode_id": "my_003",
+        "task": "pick_place",
+        "scene": "table_A",
+        "policy": "vla_v2",
+        "success": true,
+        "steps": 38,
+        "duration_s": 7.6,
+        "failure_stage": null,
+        "failure_reason": null,
+        "latency_ms": [
+            11,
+            12,
+            13,
+            11,
+            14,
+            12,
+            200
+        ]
+    }
 ]
